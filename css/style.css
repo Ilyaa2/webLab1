@@ -106,16 +106,34 @@ button:focus{
   box-shadow: 0 0 30px rgb(176, 16, 16);
 }
 
-.submit{
+button.submit{
   display: inline-block;
   margin: 0 42%;
   margin-top: 3%;
-  width: 40px;
-  height: 30px;
+  width: 120px;
+  height: 35px;
 }
 
 #specialContent{
   display: none;
+}
+
+table{
+  margin: 0 auto;  
+  margin-top: 40px;
+  border: 1px solid black;
+}
+tr,td{
+  padding: 5px;
+  border: 1px solid black;
+  font-size: 23px;
+}
+.green{
+  background-color: rgb(106, 206, 106);
+}
+
+.red{
+  background-color: rgb(244, 81, 81);
 }
 
 

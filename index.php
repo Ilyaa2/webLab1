@@ -64,14 +64,18 @@ session_start();
             5<input type="radio" name="radiobutton" value="5">
           </div>
         </div>
-
-
         <button type="submit" class="submit" onmousedown="viewContent()">Отправить</button>
         <!-- <input type="submit" name="enter_key" value="true" style="display:none">
         <input type="hidden" name="pressed_button" id="pressed_button" value="false">
         <input type="button" value="Submit" class ="submit" 
           onclick="viewContent()"> -->
       </form>
+      <script>
+      function viewContent() {
+        //document.getElementById('pressed_button').value='true';document.getElementById('myform').submit();
+        document.getElementById("specialContent").style.display = "block";
+      };
+      </script>
     </div>
     <table>
       <tr>
@@ -105,12 +109,7 @@ session_start();
 
     </table>
 
-    <script>
-      function viewContent() {
-        //document.getElementById('pressed_button').value='true';document.getElementById('myform').submit();
-        document.getElementById("specialContent").style.display = "block";
-      };
-    </script>
+    
 </body>
 
 </html>

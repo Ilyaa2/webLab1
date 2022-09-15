@@ -1,80 +1,50 @@
 <?php
+$start = microtime(1);
 
 //можно сделать что-то типо if (isset(x,y,r)){func1(),func2(),func3()}
 //косяки:
 //1) при обновлении страницы результаты все ще записываются в таблицу 
-//2) время поправь
-//3) валидация на сервере
+//2) валидация на сервере
+//3) сделать проект в разных файлах, а не все в одном
+
 //4) кнопка x не работает
 //5) валидация на клиенте
 
 
 
-
 //$start = microtime();
-
-//ПОПРАВИТЬ IF
 
 //Посмотреть мало ли будут проблемы с дробными числами
 //сделать валидацию значений от пользователя
-
-//$x = -3;
-//$y = 4;
-//$R = 6;
-
-//$x = $_GET['btn'];
-
-
-//добавить x
-
-
-
+$bool = true;
 
 
 if (isset($_GET['text'])) {
   $y = $_GET['text'];
-  
-  // if (isset($_SESSION["masy"])) {
-  //   $i = count($_SESSION["masy"]) + 1;
-  //   echo count($_SESSION["masy"]);
-  // } else {
-  //   $i = 1;
-  // }
   $i = intdiv(count($_SESSION),4)+1;
   $_SESSION["masy[$i]"] = $y;
+  if (!is_numeric($y)){
+    $bool = false;
+  }
 }
 
-if (isset($_GET['radiobutton'])) {
+if (isset($_GET['radiobutton']) and $bool) {
   $R = $_GET['radiobutton'];
-  
-  // if (isset($_SESSION["masr"])) {
-  //   $i = count($_SESSION["masr"]) + 1;
-  // } else {
-  //   $i = 1;
-  // }
   $i = intdiv(count($_SESSION),4)+1;
   $_SESSION["masr[$i]"] = $R;
 }
 
-if (isset($_GET['radiobutton'])) {
+if (isset($_GET['radiobutton']) and $bool) {
   $x = 5;
-  // if (isset($_SESSION["masx"])){
-  //   $i = count($_SESSION["masx"]) + 1;
-  // } else {
-  //   $i = 1;
-  // }
   $i = intdiv(count($_SESSION),4)+1;
   $_SESSION["masx[$i]"] = $x;
-  //echo $_SESSION["masx[$i]"];
 }
 
 
-if (isset($x) and isset($y) and isset($R)) {
+if (isset($x) and isset($y) and isset($R) and $bool) {
   $k = $R / 7;
 }
 
-
-//print($k);  
 
 function batman_upper($x, $k)
 {
@@ -113,7 +83,8 @@ function batman_lower($x, $k)
 $Rez = 0;
 
 
-if ((isset($x) and isset($y) and isset($R)) and ($y >= 0)) {
+
+if ((isset($x) and isset($y) and isset($R)) and ($y >= 0) and $bool) {
   $Rez = batman_upper($x, $k);
 } elseif (isset($x) and isset($y) and isset($R)) {
   $Rez = batman_lower($x, $k);
@@ -124,34 +95,29 @@ if (isset($x) and isset($y) and isset($R)) {
 }
 
 //это не совсем правильно, потому что он мог обрезать результат, изучи работу с дробными числами
-
 // проверить, а если будет сравнение целого числа с дробным
-// также проверить X,Y,R (от пользователя) на допустимость значений.
 
 
-//$bool = true;
+
 $response;
-if (isset($x) and isset($y) and isset($R)) {
+if (isset($x) and isset($y) and isset($R) and $bool) {
   if ($Rez >= 0) {
     $response = "Попадает";
   } else {
-    //$bool = false;
     $response = "Не попадает";
   }
   
   $i = intdiv(count($_SESSION),4)+1;
   $_SESSION["masrez[$i]"] = $response;
-  //echo $_SESSION["masrez[$i]"];
 }
 
 
-//если обновлять страницу то массив сессии будет наращиваться
 
 
 
 
 
-
+//нужно ли вообще проверять на сессию???
 
 if (isset($_SESSION) and isset($x) and isset($y) and isset($R)) {
   for($i = 1; $i < intdiv(count($_SESSION),4)+1; $i++){
@@ -189,5 +155,7 @@ if (isset($_SESSION) and isset($x) and isset($y) and isset($R)) {
 
 
 
-// echo "Время выполнения скрипта: " . (microtime() - $start);
-// echo "Текущее время: " . date("r");
+echo "<br> Время выполнения скрипта: " . number_format(microtime(1) - $start,13). " сек <br>";
+echo "Текущее время: " . date("r");
+
+//exit();
